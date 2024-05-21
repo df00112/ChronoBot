@@ -7,6 +7,7 @@ public class WeaponManager : MonoBehaviour
     private Weapon[] _weapons= new Weapon[2];
     private int _currentWeaponIndex = 0;
     private HashSet<Weapon> _pickedUpWeapons= new HashSet<Weapon>();
+    public Transform _playerHand;
 
     public void EquipWeapon(Weapon weapon)
     {
@@ -36,6 +37,24 @@ public class WeaponManager : MonoBehaviour
                 }
             }
         }
+
+        Attach(weapon);
+    }
+
+    public void Attach(Weapon weapon)
+    {
+        if (weapon is MeleeWeapon)
+        {
+            weapon.transform.SetParent(_playerHand);
+            weapon.transform.localRotation = Quaternion.Euler(5f, -17f, 100f);
+            weapon.transform.localPosition = new Vector3(0.0f, 0.005f, 0.0f);
+        } else if (weapon is RangedWeapon)
+        {
+            weapon.transform.SetParent(_playerHand);
+            weapon.transform.localRotation = Quaternion.Euler(-100f, 90f, 0f);
+            weapon.transform.localPosition = new Vector3(-0.003f, 0.006f, 0.0f);
+        }
+        weapon.GetComponent<BoxCollider>().enabled = false;
     }
 
     public void SwitchWeapon()

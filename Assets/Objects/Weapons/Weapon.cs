@@ -13,9 +13,8 @@ public abstract class Weapon : MonoBehaviour, IInteractable
 
     public bool Interact(Interactor interactor)
     {
-        Debug.Log(_weaponName + " picked up");
+        //Debug.Log(_weaponName + " picked up");
         interactor._weaponManager.EquipWeapon(this);
-        gameObject.SetActive(false);
         return true;
     }
 }
