@@ -398,6 +398,18 @@ PrefabInstance:
       value: Sword7_Blue
       objectReference: {fileID: 0}
     - target: {fileID: 6358568393392945801, guid: 446537a5e4bab814fb6203cbd4680b71, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6358568393392945801, guid: 446537a5e4bab814fb6203cbd4680b71, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6358568393392945801, guid: 446537a5e4bab814fb6203cbd4680b71, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6358568393392945801, guid: 446537a5e4bab814fb6203cbd4680b71, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -1449,6 +1461,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3694fadb841d6f64fb47ec79edded401, type: 3}
+--- !u!4 &899994361 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -3220319501169496967, guid: 82a2914d8f86c62488456950c8330e38, type: 3}
+  m_PrefabInstance: {fileID: 959983443}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &924529522
 GameObject:
   m_ObjectHideFlags: 0
@@ -2088,6 +2105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e57b36c5fddc794a8dfc4fb4539db91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerHand: {fileID: 0}
 --- !u!114 &1196785636
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8661,6 +8679,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e57b36c5fddc794a8dfc4fb4539db91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerHand: {fileID: 899994361}
 --- !u!114 &1475605171
 MonoBehaviour:
   m_ObjectHideFlags: 0
