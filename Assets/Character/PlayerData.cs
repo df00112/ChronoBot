@@ -23,4 +23,23 @@ public class PlayerData : MonoBehaviour
         get => _movementSpeed;
         set => _movementSpeed = value;
     }
+
+    // Method to handle taking damage
+    public void TakeDamage(int damage)
+    {
+        Health -= damage;
+        Debug.Log($"{PlayerName} took {damage} damage, remaining health: {Health}");
+
+        if (Health <= 0)
+        {
+            Die();
+        }
+    }
+
+    // Method to handle player death
+    private void Die()
+    {
+        Debug.Log($"{PlayerName} has died!");
+        // handling game over logic here
+    }
 }
