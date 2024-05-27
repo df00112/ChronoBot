@@ -19,26 +19,60 @@ public class WeaponManager : MonoBehaviour
 
         _pickedUpWeapons.Add(weapon);
 
-        if (_weapons[0] != null && _weapons[1] != null)
+        if (BothWeaponSlotsOccupied())
         {
-            _weapons[_currentWeaponIndex] = null;
-            _weapons[_currentWeaponIndex] = weapon;
-            Debug.Log("Equipped a weapon");
+            ReplaceCurrentWeapon(weapon);
         }
         else
         {
-            for (int i = 0; i < _weapons.Length; i++)
-            {
-                if (_weapons[i] == null)
-                {
-                    _weapons[i] = weapon;
-                    _currentWeaponIndex = i;
-                    break;
-                }
-            }
+            EquipInEmptySlot(weapon);
         }
 
         Attach(weapon);
+    }
+
+    private bool BothWeaponSlotsOccupied()
+    {
+        return _weapons[0] != null && _weapons[1] != null;
+    }
+
+    private void ReplaceCurrentWeapon(Weapon weapon)
+    {
+        DropCurrentWeapon();
+        _weapons[_currentWeaponIndex] = weapon;
+    }
+
+    private void EquipInEmptySlot(Weapon weapon)
+    {
+        if (_weapons[_currentWeaponIndex] != null)
+        {
+            _weapons[(_currentWeaponIndex)].Hide();
+        }
+
+        for (int i = 0; i < _weapons.Length; i++)
+        {
+            if (_weapons[i] == null)
+            {
+                _weapons[i] = weapon;
+                _currentWeaponIndex = i;
+                return;
+            }
+        }
+    }
+
+    public void DropCurrentWeapon()
+    {
+        if (_weapons[_currentWeaponIndex] == null)
+        {
+            Debug.Log("No weapon to drop");
+            return;
+        }
+
+        Weapon currentWeapon = _weapons[_currentWeaponIndex];
+        currentWeapon.transform.SetParent(null);
+        currentWeapon.Reset(transform.position, transform.rotation);
+        _weapons[_currentWeaponIndex] = null;
+        _pickedUpWeapons.Remove(currentWeapon);
     }
 
     public void Attach(Weapon weapon)
@@ -65,6 +99,11 @@ public class WeaponManager : MonoBehaviour
         _currentWeaponIndex = (_currentWeaponIndex + 1) % 2;
 
         Debug.Log("Switched to weapon: " + _weapons[_currentWeaponIndex].InteractionText);
+
+        // Disable the current weapon
+        _weapons[(_currentWeaponIndex + 1) % 2].Hide();
+        // Enable the new weapon
+        _weapons[_currentWeaponIndex].Show();
     }
 
     public void PerformAttack()
