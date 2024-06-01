@@ -32,8 +32,6 @@ public class PlayerController : MonoBehaviour
     float dashSpeed = 10.0f;
     float dashTimer = 0.0f;
 
-    int currentHealth;
-
     void Awake()
     {
         playerInput = new PlayerInput();
@@ -41,8 +39,6 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         weaponManager = GetComponent<WeaponManager>();
         playerData = GetComponent<PlayerData>();
-
-        currentHealth = playerData.Health;
 
         isWalkingHash = Animator.StringToHash("isWalking");
         isRunningHash = Animator.StringToHash("isRunning");
@@ -164,6 +160,33 @@ public class PlayerController : MonoBehaviour
             animator.SetBool(isRunningHash, false);
         }
     }
+
+    void handleStamina(){
+        if (isRunPressed && playerData.Stamina > 0)
+        {
+            float staminaToConsume = playerData.StaminaConsumeRate * Time.deltaTime * 15;
+            playerData.Stamina -= (int)(staminaToConsume);
+            playerData.Stamina = Mathf.Clamp(playerData.Stamina, 0, playerData.MaxStamina);
+        }
+        else
+        {
+            isRunPressed = false;
+            if (playerData.Stamina < playerData.MaxStamina && playerData.StaminaRegenTimer >= playerData.StaminaRegenDelay)
+            {
+                playerData.Stamina += (int)(playerData.StaminaRegenRate * Time.deltaTime * 15);
+                playerData.Stamina = Mathf.Clamp(playerData.Stamina, 0, playerData.MaxStamina);
+            }
+        }
+
+        if (isRunPressed)
+        {
+            playerData.StaminaRegenTimer = 0;
+        }
+        else
+        {
+            playerData.StaminaRegenTimer += Time.deltaTime;
+        }
+    }
     
     // Update is called once per frame
     void Update()
@@ -192,6 +215,7 @@ public class PlayerController : MonoBehaviour
         }
         
         handleGravity();
+        handleStamina();
     }
 
     void OnEnable()

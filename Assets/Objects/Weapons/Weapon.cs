@@ -4,8 +4,8 @@ using UnityEngine;
 
 public abstract class Weapon : MonoBehaviour, IInteractable
 {
-    [SerializeField] protected string _weaponName;
-    public string InteractionText => _weaponName;
+    [SerializeField] protected WeaponData _weaponData;
+    public string InteractionText => _weaponData.WeaponName;
 
     public virtual void Attack() {}
     public virtual void SecondaryAttack() {}
