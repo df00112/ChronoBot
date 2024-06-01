@@ -7,7 +7,7 @@ public class MeleeWeapon : Weapon
     public override void Attack()
     {
         // Implement melee attack logic (e.g., swing the lightsaber)
-        Debug.Log(_weaponName + " swings");
+        Debug.Log(_weaponData.WeaponName + " swings");
     }
 
     public override void Reset(Vector3 playerPosition, Quaternion playerRotation)

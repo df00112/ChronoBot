@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Ranged Weapon", menuName = "Weapons/Ranged Weapon")]
-public class RangedWeaponData : ScriptableObject
+[CreateAssetMenu(fileName = "WeaponData", menuName = "Objects/Weapons/Weapon Data")]
+public class WeaponData : ScriptableObject
 {
     [SerializeField] private string _weaponName;
     public string WeaponName => _weaponName;
@@ -13,7 +13,4 @@ public class RangedWeaponData : ScriptableObject
 
     [SerializeField] private float _attackSpeed;
     public float AttackSpeed => _attackSpeed;
-
-    [SerializeField] private float _range;
-    public float Range => _range;
 }
