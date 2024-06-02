@@ -6,7 +6,8 @@ public abstract class Weapon : MonoBehaviour, IInteractable
 {
     [SerializeField] protected WeaponData _weaponData;
     public string InteractionText => _weaponData.WeaponName;
-
+    public WeaponData WeaponData => _weaponData;
+    
     public virtual void Attack() {}
     public virtual void SecondaryAttack() {}
     public virtual void Skill() {}
