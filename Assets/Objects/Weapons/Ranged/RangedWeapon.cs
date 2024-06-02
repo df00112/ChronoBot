@@ -7,6 +7,6 @@ public class RangedWeapon : Weapon
     public override void Attack()
     {
         // Implement ranged attack logic (e.g., shoot the gun)
-        Debug.Log(_weaponData.WeaponName + " shoots ");
+        Debug.Log(this.WeaponData.WeaponName + " shoots ");
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WeaponManager : MonoBehaviour
 {
@@ -8,6 +9,9 @@ public class WeaponManager : MonoBehaviour
     private int _currentWeaponIndex = 0;
     private HashSet<Weapon> _pickedUpWeapons= new HashSet<Weapon>();
     public Transform _playerHand;
+    public Image _primaryWeaponImage;
+    public Image _secondaryWeaponImage;
+    public Image _skillImage;
 
     public void EquipWeapon(Weapon weapon)
     {
@@ -29,6 +33,7 @@ public class WeaponManager : MonoBehaviour
         }
 
         Attach(weapon);
+        UpdateUI();
     }
 
     private bool BothWeaponSlotsOccupied()
@@ -104,6 +109,8 @@ public class WeaponManager : MonoBehaviour
         _weapons[(_currentWeaponIndex + 1) % 2].Hide();
         // Enable the new weapon
         _weapons[_currentWeaponIndex].Show();
+
+        UpdateUI();
     }
 
     public void PerformAttack()
@@ -139,6 +146,38 @@ public class WeaponManager : MonoBehaviour
         else
         {
             _weapons[_currentWeaponIndex]?.Skill();
+        }
+    }
+
+    public void UpdateUI()
+    {
+        if (_weapons[_currentWeaponIndex] != null)
+        {
+           UpdateIcon(_weapons[_currentWeaponIndex]);
+        }
+        else
+        {
+            _primaryWeaponImage.sprite = null;
+            _secondaryWeaponImage.sprite = null;
+            _skillImage.sprite = null;
+        }
+    }
+
+    public void UpdateIcon(Weapon weapon)
+    {
+        if (weapon.WeaponData.PrimaryWeaponImage != null)
+        {
+            _primaryWeaponImage.sprite = weapon.WeaponData.PrimaryWeaponImage;
+        }
+
+        if (weapon.WeaponData.SecondaryWeaponImage != null)
+        {
+            _secondaryWeaponImage.sprite = weapon.WeaponData.SecondaryWeaponImage;
+        }
+
+        if (weapon.WeaponData.SkillImage != null)
+        {
+            _skillImage.sprite = weapon.WeaponData.SkillImage;
         }
     }
 }
