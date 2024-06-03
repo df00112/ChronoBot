@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class RangedWeapon : Weapon
 {
-    /* [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform firePoint;
     [SerializeField] private GameObject chargedShotPrefab;
-    [SerializeField] private GameObject grenadePrefab;
+    [SerializeField] private GameObject assistDronePrefab;
 
     public override void Attack()
     {
@@ -17,31 +17,43 @@ public class RangedWeapon : Weapon
 
     public override void SecondaryAttack()
     {
-        Debug.Log(this.WeaponData.WeaponName + " shoots a charged shot");
-        ShootChargedShot();
+        Debug.Log(this.WeaponData.WeaponName + " fires a charged shot ");
+        FireChargedShot();
     }
 
     public override void Skill()
     {
-        Debug.Log(this.WeaponData.WeaponName + " throws a grenade");
-        ThrowGrenade();
+        Debug.Log(this.WeaponData.WeaponName + " deploys an assist drone ");
+        DeployAssistDrone();
     }
 
     private void Shoot()
     {
-        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-        bullet.GetComponent<Bullet>().SetDamage(this.WeaponData.Damage);
+        if (bulletPrefab != null && firePoint != null)
+        {
+            Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        }
     }
 
-    private void ShootChargedShot()
+    private void FireChargedShot()
     {
-        GameObject chargedShot = Instantiate(chargedShotPrefab, firePoint.position, firePoint.rotation);
-        chargedShot.GetComponent<Bullet>().SetDamage(this.WeaponData.Damage * 2);
+        if (chargedShotPrefab != null && firePoint != null)
+        {
+            Instantiate(chargedShotPrefab, firePoint.position, firePoint.rotation);
+        }
     }
 
-    private void ThrowGrenade()
+    private void DeployAssistDrone()
     {
-        GameObject grenade = Instantiate(grenadePrefab, firePoint.position, firePoint.rotation);
-        grenade.GetComponent<Grenade>().SetDamage(this.WeaponData.Damage * 3);
-    } */
+        if (assistDronePrefab != null && firePoint != null)
+        {
+            var assistDrone = Instantiate(assistDronePrefab, firePoint.position, firePoint.rotation);
+            // Optionally, add some movement or behavior to the drone
+            AssistDrone droneScript = assistDrone.GetComponent<AssistDrone>();
+            if (droneScript != null)
+            {
+                droneScript.Initialize();
+            }
+        }
+    }
 }
