@@ -11,8 +11,7 @@ public abstract class Weapon : MonoBehaviour, IInteractable
     public virtual void Attack() {}
     public virtual void SecondaryAttack() {}
     public virtual void Skill() {}
-    public virtual void Reset(Vector3 playerPosition, Quaternion playerRotation) {}
-
+    
     public bool Interact(Interactor interactor)
     {
         //Debug.Log(_weaponName + " picked up");
@@ -28,6 +27,28 @@ public abstract class Weapon : MonoBehaviour, IInteractable
     public void Show()
     {
         gameObject.SetActive(true);
+    }
+
+    void FixedUpdate()
+    {
+        if (transform.parent == null)
+        {
+            transform.Rotate(Vector3.up, 1.0f);
+        }
+    }
+
+    public void Reset(Vector3 playerPosition, Quaternion playerRotation)
+    {
+        float dropDistance = 1.0f;
+        Vector3 offset = playerRotation * Vector3.forward * dropDistance;
+        Vector3 newPosition = playerPosition + offset;
+        newPosition.y = 0.73f;
+
+        transform.position = newPosition;
+        transform.rotation = Quaternion.identity;
+
+        gameObject.SetActive(true);
+        GetComponent<BoxCollider>().enabled = true;
     }
 }
 

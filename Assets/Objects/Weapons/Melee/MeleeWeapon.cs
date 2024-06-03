@@ -9,18 +9,4 @@ public class MeleeWeapon : Weapon
         // Implement melee attack logic (e.g., swing the lightsaber)
         Debug.Log(this.WeaponData.WeaponName + " swings");
     }
-
-    public override void Reset(Vector3 playerPosition, Quaternion playerRotation)
-    {
-        float dropDistance = 1.0f;
-        Vector3 offset = playerRotation * Vector3.forward * dropDistance;
-        Vector3 newPosition = playerPosition + offset;
-        newPosition.y = 0.73f;
-
-        transform.position = newPosition;
-        transform.rotation = Quaternion.identity;
-
-        gameObject.SetActive(true);
-        GetComponent<BoxCollider>().enabled = true;
-    }
 }
