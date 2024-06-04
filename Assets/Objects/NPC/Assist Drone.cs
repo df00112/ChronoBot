@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AssistDrone : MonoBehaviour
 {
-    public float hoverDistance = 2f;
+    public float hoverDistance = 2.5f;
     public float followSpeed = 2f;
     public float attackInterval = 3f;
     public GameObject attackProjectilePrefab;
@@ -22,7 +22,7 @@ public class AssistDrone : MonoBehaviour
         lastAttackTime = Time.time;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         FollowPlayer();
         if (Time.time >= lastAttackTime + attackInterval)
@@ -34,7 +34,7 @@ public class AssistDrone : MonoBehaviour
 
     private void FollowPlayer()
     {
-        Vector3 targetPosition = player.position + player.right * hoverDistance;
+        Vector3 targetPosition = player.position + player.up * hoverDistance;
         transform.position = Vector3.Lerp(transform.position, targetPosition, followSpeed * Time.deltaTime);
     }
 

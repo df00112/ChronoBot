@@ -47,8 +47,11 @@ public class RangedWeapon : Weapon
     {
         if (assistDronePrefab != null && firePoint != null)
         {
-            var assistDrone = Instantiate(assistDronePrefab, firePoint.position, firePoint.rotation);
-            // Optionally, add some movement or behavior to the drone
+
+            var assistDrone = Instantiate(assistDronePrefab,
+                new Vector3(Random.Range(-20f, 20f), 50, Random.Range(-20f, 20f)),
+                Quaternion.Euler(0, 0, 0)
+            );
             AssistDrone droneScript = assistDrone.GetComponent<AssistDrone>();
             if (droneScript != null)
             {
