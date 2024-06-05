@@ -12,6 +12,14 @@ public class WeaponManager : MonoBehaviour
     public Image _primaryWeaponImage;
     public Image _secondaryWeaponImage;
     public Image _skillImage;
+    private Animator _animator;
+    private AudioSource _audioSource;
+
+    void Awake()
+    {
+        _animator = GetComponent<Animator>();
+        _audioSource = GetComponent<AudioSource>();
+    }
 
     public void EquipWeapon(Weapon weapon)
     {
@@ -90,8 +98,8 @@ public class WeaponManager : MonoBehaviour
         } else if (weapon is RangedWeapon)
         {
             weapon.transform.SetParent(_playerHand);
-            weapon.transform.localRotation = Quaternion.Euler(-100f, 90f, 0f);
-            weapon.transform.localPosition = new Vector3(-0.003f, 0.006f, 0.0f);
+            weapon.transform.localRotation = Quaternion.Euler(-96.061f, 127.736f, -47.99f);
+            weapon.transform.localPosition = new Vector3(-0.004f, 0.0086f, 0.0012f);
         }
         weapon.GetComponent<BoxCollider>().enabled = false;
     }
@@ -121,7 +129,10 @@ public class WeaponManager : MonoBehaviour
         }
         else
         {
-            _weapons[_currentWeaponIndex]?.Attack();
+            Weapon currentWeapon = _weapons[_currentWeaponIndex];
+            currentWeapon?.Attack();
+            currentWeapon?.PlayAttackAnimation(_animator);
+            currentWeapon?.PlayAttackSound(_audioSource);
         }
     }
 
@@ -133,7 +144,10 @@ public class WeaponManager : MonoBehaviour
         }
         else
         {
-            _weapons[_currentWeaponIndex]?.SecondaryAttack();
+            Weapon currentWeapon = _weapons[_currentWeaponIndex];
+            currentWeapon?.SecondaryAttack();
+            currentWeapon?.PlaySecondaryAttackAnimation(_animator);
+            currentWeapon?.PlaySecondaryAttackSound(_audioSource);
         }
     }
 
@@ -145,7 +159,10 @@ public class WeaponManager : MonoBehaviour
         }
         else
         {
-            _weapons[_currentWeaponIndex]?.Skill();
+            Weapon currentWeapon = _weapons[_currentWeaponIndex];
+            currentWeapon?.Skill();
+            currentWeapon?.PlaySkillAnimation(_animator);
+            currentWeapon?.PlaySkillSound(_audioSource);
         }
     }
 

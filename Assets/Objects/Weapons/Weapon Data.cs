@@ -23,4 +23,22 @@ public class WeaponData : ScriptableObject
 
     [SerializeField] private Sprite _skillImage;
     public Sprite SkillImage => _skillImage;
+
+     [SerializeField] private AudioClip _attackSound;
+    public AudioClip AttackSound => _attackSound;
+
+    [SerializeField] private AudioClip _secondaryAttackSound;
+    public AudioClip SecondaryAttackSound => _secondaryAttackSound;
+
+    [SerializeField] private AudioClip _skillSound;
+    public AudioClip SkillSound => _skillSound;
+
+    [SerializeField] private string _attackAnimation;
+    public string AttackAnimation => _attackAnimation;
+
+    [SerializeField] private string _secondaryAttackAnimation;
+    public string SecondaryAttackAnimation => _secondaryAttackAnimation;
+
+    [SerializeField] private string _skillAnimation;
+    public string SkillAnimation => _skillAnimation;
 }

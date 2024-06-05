@@ -59,4 +59,34 @@ public class RangedWeapon : Weapon
             }
         }
     }
+
+    public override void PlayAttackAnimation(Animator animator)
+    {
+        animator.SetTrigger(_weaponData.AttackAnimation);
+    }
+
+    public override void PlaySecondaryAttackAnimation(Animator animator)
+    {
+        animator.SetTrigger(_weaponData.SecondaryAttackAnimation);
+    }
+
+    public override void PlaySkillAnimation(Animator animator)
+    {
+        animator.SetTrigger(_weaponData.SkillAnimation);
+    }
+
+    public override void PlayAttackSound(AudioSource audioSource)
+    {
+        audioSource.PlayOneShot(_weaponData.AttackSound);
+    }
+
+    public override void PlaySecondaryAttackSound(AudioSource audioSource)
+    {
+        audioSource.PlayOneShot(_weaponData.SecondaryAttackSound);
+    }
+
+    public override void PlaySkillSound(AudioSource audioSource)
+    {
+        audioSource.PlayOneShot(_weaponData.SkillSound);
+    }
 }
