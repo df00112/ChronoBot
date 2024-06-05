@@ -192,6 +192,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 896495152}
     - target: {fileID: 8367437243782911410, guid: 08dc654627487e642a0fa6eb45969fb6, type: 3}
+      propertyPath: _health
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8367437243782911410, guid: 08dc654627487e642a0fa6eb45969fb6, type: 3}
       propertyPath: _healthBar
       value: 
       objectReference: {fileID: 104882862}
@@ -1194,6 +1198,10 @@ PrefabInstance:
     - target: {fileID: 546343906284489331, guid: 4346aae5efbba1f499f168d3265893cd, type: 3}
       propertyPath: m_Name
       value: Bullet
+      objectReference: {fileID: 0}
+    - target: {fileID: 546343906284489331, guid: 4346aae5efbba1f499f168d3265893cd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8425909498765768786, guid: 4346aae5efbba1f499f168d3265893cd, type: 3}
       propertyPath: m_LocalPosition.x
