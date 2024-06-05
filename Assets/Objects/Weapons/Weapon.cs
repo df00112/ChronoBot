@@ -8,10 +8,51 @@ public abstract class Weapon : MonoBehaviour, IInteractable
     public string InteractionText => _weaponData.WeaponName;
     public WeaponData WeaponData => _weaponData;
 
-    // May not be needed methods for all weapons
-    public virtual void Attack() {}
-    public virtual void SecondaryAttack() {}
-    public virtual void Skill() {}
+    private float _lastAttackTime;
+    private float _lastSecondaryAttackTime;
+    private float _lastSkillTime;
+
+    public bool CanAttack()
+    {
+        return Time.time - _lastAttackTime >= _weaponData.AttackCooldown;
+    }
+
+    public bool CanSecondaryAttack()
+    {
+        return Time.time - _lastSecondaryAttackTime >= _weaponData.SecondaryAttackCooldown;
+    }
+
+    public bool CanUseSkill()
+    {
+        return Time.time - _lastSkillTime >= _weaponData.SkillCooldown;
+    }
+
+    public virtual void Attack() 
+    {
+        if (CanAttack())
+        {
+            _lastAttackTime = Time.time;
+            // Attack logic
+        }
+    }
+
+    public virtual void SecondaryAttack() 
+    {
+        if (CanSecondaryAttack())
+        {
+            _lastSecondaryAttackTime = Time.time;
+            // Secondary attack logic
+        }
+    }
+
+    public virtual void Skill() 
+    {
+        if (CanUseSkill())
+        {
+            _lastSkillTime = Time.time;
+            // Skill logic
+        }
+    }
 
     public virtual void PlayAttackAnimation(Animator animator) {}
     public virtual void PlaySecondaryAttackAnimation(Animator animator) {}

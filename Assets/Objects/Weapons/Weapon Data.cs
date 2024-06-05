@@ -12,8 +12,14 @@ public class WeaponData : ScriptableObject
     [SerializeField] private int _damage;
     public int Damage => _damage;
 
-    [SerializeField] private float _attackSpeed;
-    public float AttackSpeed => _attackSpeed;
+    [SerializeField] private float _attackCooldown;
+    public float AttackCooldown => _attackCooldown;
+
+    [SerializeField] private float _secondaryAttackCooldown;
+    public float SecondaryAttackCooldown => _secondaryAttackCooldown;
+
+    [SerializeField] private float _skillCooldown;
+    public float SkillCooldown => _skillCooldown;
 
     [SerializeField] private Sprite _primaryWeaponImage;
     public Sprite PrimaryWeaponImage => _primaryWeaponImage;

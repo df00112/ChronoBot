@@ -9,22 +9,39 @@ public class RangedWeapon : Weapon
     [SerializeField] private GameObject chargedShotPrefab;
     [SerializeField] private GameObject assistDronePrefab;
 
+    void Awake()
+    {
+        firePoint = GameObject.Find("FirePoint").transform;
+    }
+
     public override void Attack()
     {
-        Debug.Log(this.WeaponData.WeaponName + " shoots ");
-        Shoot();
+        if (CanAttack())
+        {
+            base.Attack();
+            Debug.Log(this.WeaponData.WeaponName + " shoots ");
+            Shoot();
+        }
     }
 
     public override void SecondaryAttack()
     {
-        Debug.Log(this.WeaponData.WeaponName + " fires a charged shot ");
-        FireChargedShot();
+        if (CanSecondaryAttack())
+        {
+            base.SecondaryAttack();
+            Debug.Log(this.WeaponData.WeaponName + " fires a charged shot ");
+            FireChargedShot();
+        }
     }
 
     public override void Skill()
     {
-        Debug.Log(this.WeaponData.WeaponName + " deploys an assist drone ");
-        DeployAssistDrone();
+        if (CanUseSkill())
+        {
+            base.Skill();
+            Debug.Log(this.WeaponData.WeaponName + " deploys an assist drone ");
+            DeployAssistDrone();
+        }
     }
 
     private void Shoot()

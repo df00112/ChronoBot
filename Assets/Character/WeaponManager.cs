@@ -126,6 +126,7 @@ public class WeaponManager : MonoBehaviour
         if (_weapons[0] == null && _weapons[1] == null)
         {
             Debug.Log("Performed punch attack!");
+            _animator.SetTrigger("Punch");
         }
         else
         {
@@ -141,6 +142,7 @@ public class WeaponManager : MonoBehaviour
         if (_weapons[0] == null && _weapons[1] == null)
         {
             Debug.Log("Performed kick attack!");
+            _animator.SetTrigger("Kick");
         }
         else
         {
@@ -155,7 +157,7 @@ public class WeaponManager : MonoBehaviour
     {
         if (_weapons[0] == null && _weapons[1] == null)
         {
-            Debug.Log("No skill to perform");
+            _animator.SetTrigger("HurricaneKick");
         }
         else
         {
