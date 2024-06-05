@@ -12,6 +12,9 @@ public class WeaponManager : MonoBehaviour
     public Image _primaryWeaponImage;
     public Image _secondaryWeaponImage;
     public Image _skillImage;
+    public Sprite _defaultPrimaryImage;
+    public Sprite _defaultSecondaryImage;
+    public Sprite _defaultSkillImage;
     private Animator _animator;
     private AudioSource _audioSource;
 
@@ -19,6 +22,8 @@ public class WeaponManager : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
         _audioSource = GetComponent<AudioSource>();
+        
+        UpdateUI();
     }
 
     public void EquipWeapon(Weapon weapon)
@@ -176,9 +181,9 @@ public class WeaponManager : MonoBehaviour
         }
         else
         {
-            _primaryWeaponImage.sprite = null;
-            _secondaryWeaponImage.sprite = null;
-            _skillImage.sprite = null;
+            _primaryWeaponImage.sprite = _defaultPrimaryImage;
+            _secondaryWeaponImage.sprite = _defaultSecondaryImage;
+            _skillImage.sprite = _defaultSkillImage;
         }
     }
 

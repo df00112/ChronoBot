@@ -652,13 +652,25 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1612677956}
     - target: {fileID: 3798732396142552140, guid: 08dc654627487e642a0fa6eb45969fb6, type: 3}
+      propertyPath: _defaultSkillImage
+      value: 
+      objectReference: {fileID: 21300000, guid: 492588c7278d9ac4982409183ac04757, type: 3}
+    - target: {fileID: 3798732396142552140, guid: 08dc654627487e642a0fa6eb45969fb6, type: 3}
       propertyPath: _primaryWeaponImage
       value: 
       objectReference: {fileID: 1370763164}
     - target: {fileID: 3798732396142552140, guid: 08dc654627487e642a0fa6eb45969fb6, type: 3}
+      propertyPath: _defaultPrimaryImage
+      value: 
+      objectReference: {fileID: 21300000, guid: 992d57164098d6e49b3fb15d023a2720, type: 3}
+    - target: {fileID: 3798732396142552140, guid: 08dc654627487e642a0fa6eb45969fb6, type: 3}
       propertyPath: _secondaryWeaponImage
       value: 
       objectReference: {fileID: 896495152}
+    - target: {fileID: 3798732396142552140, guid: 08dc654627487e642a0fa6eb45969fb6, type: 3}
+      propertyPath: _defaultSecondaryImage
+      value: 
+      objectReference: {fileID: 21300000, guid: ba7397326fe8cd8449c70d597aca64e9, type: 3}
     - target: {fileID: 3918649092560008427, guid: 08dc654627487e642a0fa6eb45969fb6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.0000000015965531
