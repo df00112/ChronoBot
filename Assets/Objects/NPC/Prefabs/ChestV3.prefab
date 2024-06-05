@@ -263,6 +263,7 @@ GameObject:
   - component: {fileID: 3743199355351202742}
   - component: {fileID: 5607114113778025654}
   - component: {fileID: 5064973319106099614}
+  - component: {fileID: 4147180890354109379}
   m_Layer: 6
   m_Name: ChestV3
   m_TagString: Untagged
@@ -394,3 +395,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _chestName: Chest
+--- !u!95 &4147180890354109379
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8011249374252953079}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ba45fe21f7d303d4fac5abaea8644f61, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
