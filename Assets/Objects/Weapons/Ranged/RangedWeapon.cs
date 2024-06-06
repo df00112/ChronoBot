@@ -4,44 +4,106 @@ using UnityEngine;
 
 public class RangedWeapon : Weapon
 {
-    /* [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform firePoint;
     [SerializeField] private GameObject chargedShotPrefab;
-    [SerializeField] private GameObject grenadePrefab;
+    [SerializeField] private GameObject assistDronePrefab;
+
+    void Awake()
+    {
+        firePoint = GameObject.Find("FirePoint").transform;
+    }
 
     public override void Attack()
     {
-        Debug.Log(this.WeaponData.WeaponName + " shoots ");
-        Shoot();
+        if (CanAttack())
+        {
+            base.Attack();
+            Debug.Log(this.WeaponData.WeaponName + " shoots ");
+            Shoot();
+        }
     }
 
     public override void SecondaryAttack()
     {
-        Debug.Log(this.WeaponData.WeaponName + " shoots a charged shot");
-        ShootChargedShot();
+        if (CanSecondaryAttack())
+        {
+            base.SecondaryAttack();
+            Debug.Log(this.WeaponData.WeaponName + " fires a charged shot ");
+            FireChargedShot();
+        }
     }
 
     public override void Skill()
     {
-        Debug.Log(this.WeaponData.WeaponName + " throws a grenade");
-        ThrowGrenade();
+        if (CanUseSkill())
+        {
+            base.Skill();
+            Debug.Log(this.WeaponData.WeaponName + " deploys an assist drone ");
+            DeployAssistDrone();
+        }
     }
 
     private void Shoot()
     {
-        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-        bullet.GetComponent<Bullet>().SetDamage(this.WeaponData.Damage);
+        if (bulletPrefab != null && firePoint != null)
+        {
+            Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        }
     }
 
-    private void ShootChargedShot()
+    private void FireChargedShot()
     {
-        GameObject chargedShot = Instantiate(chargedShotPrefab, firePoint.position, firePoint.rotation);
-        chargedShot.GetComponent<Bullet>().SetDamage(this.WeaponData.Damage * 2);
+        if (chargedShotPrefab != null && firePoint != null)
+        {
+            Instantiate(chargedShotPrefab, firePoint.position, firePoint.rotation);
+        }
     }
 
-    private void ThrowGrenade()
+    private void DeployAssistDrone()
     {
-        GameObject grenade = Instantiate(grenadePrefab, firePoint.position, firePoint.rotation);
-        grenade.GetComponent<Grenade>().SetDamage(this.WeaponData.Damage * 3);
-    } */
+        if (assistDronePrefab != null && firePoint != null)
+        {
+
+            var assistDrone = Instantiate(assistDronePrefab,
+                new Vector3(Random.Range(-20f, 20f), 50, Random.Range(-20f, 20f)),
+                Quaternion.Euler(0, 0, 0)
+            );
+            AssistDrone droneScript = assistDrone.GetComponent<AssistDrone>();
+            if (droneScript != null)
+            {
+                droneScript.Initialize();
+            }
+        }
+    }
+
+    public override void PlayAttackAnimation(Animator animator)
+    {
+        animator.SetTrigger(_weaponData.AttackAnimation);
+    }
+
+    public override void PlaySecondaryAttackAnimation(Animator animator)
+    {
+        animator.SetTrigger(_weaponData.SecondaryAttackAnimation);
+    }
+
+    public override void PlaySkillAnimation(Animator animator)
+    {
+        animator.SetTrigger(_weaponData.SkillAnimation);
+    }
+
+    public override void PlayAttackSound(AudioSource audioSource)
+    {
+        audioSource.PlayOneShot(_weaponData.AttackSound);
+    }
+
+    public override void PlaySecondaryAttackSound(AudioSource audioSource)
+    {
+        audioSource.PlayOneShot(_weaponData.SecondaryAttackSound);
+    }
+
+    public override void PlaySkillSound(AudioSource audioSource)
+    {
+        audioSource.PlayOneShot(_weaponData.SkillSound);
+    }
 }

@@ -25,11 +25,11 @@ public class PlayerController : MonoBehaviour
     
     // Action-related variables
     bool isDashPressed = false;
+    bool isDashing = false;
 
     // Other variables
     float rotationFactorPerFrame = 15.0f;
     float dashDuration = 0.25f;
-    float dashSpeed = 10.0f;
     float dashTimer = 0.0f;
 
     void Awake()
@@ -42,6 +42,7 @@ public class PlayerController : MonoBehaviour
 
         isWalkingHash = Animator.StringToHash("isWalking");
         isRunningHash = Animator.StringToHash("isRunning");
+        isDashingHash = Animator.StringToHash("isDashing");
     
         playerInput.CharacterControls.Move.started += onMovementInput;
         playerInput.CharacterControls.Move.performed += onMovementInput;
@@ -77,28 +78,37 @@ public class PlayerController : MonoBehaviour
 
     void onDash(InputAction.CallbackContext context)
     {
-        isDashPressed = context.ReadValueAsButton();
+        if (!isDashing)
+        {
+            isDashPressed = context.ReadValueAsButton();
+        }
     }
 
     void onMovementInput (InputAction.CallbackContext context)
     {
-        currentMovementInput = context.ReadValue<Vector2>();
-        currentMovement.x = currentMovementInput.x;
-        currentMovement.z = currentMovementInput.y;
-        currentRunMovement.x = currentMovementInput.x * playerData.MovementSpeed;
-        currentRunMovement.z = currentMovementInput.y * playerData.MovementSpeed;
-        isMovementPressed = currentMovementInput.x != 0 || currentMovementInput.y != 0;
-
-        if (!isMovementPressed)
+        if (!isDashing)
         {
-            currentMovement = Vector3.zero;
-            currentRunMovement = Vector3.zero;
+            currentMovementInput = context.ReadValue<Vector2>();
+            currentMovement.x = currentMovementInput.x;
+            currentMovement.z = currentMovementInput.y;
+            currentRunMovement.x = currentMovementInput.x * playerData.MovementSpeed;
+            currentRunMovement.z = currentMovementInput.y * playerData.MovementSpeed;
+            isMovementPressed = currentMovementInput.x != 0 || currentMovementInput.y != 0;
+
+            if (!isMovementPressed)
+            {
+                currentMovement = Vector3.zero;
+                currentRunMovement = Vector3.zero;
+            }
         }
     }
 
     void onRun(InputAction.CallbackContext context)
     {
-        isRunPressed = context.ReadValueAsButton();
+        if (!isDashing)
+        {
+            isRunPressed = context.ReadValueAsButton();
+        }    
     }
 
     void handleGravity()
@@ -117,17 +127,20 @@ public class PlayerController : MonoBehaviour
 
     void handleRotation()
     {
-        Vector3 positionToLookAt;
-        
-        positionToLookAt.x = currentMovement.x;
-        positionToLookAt.y = 0.0f;
-        positionToLookAt.z = currentMovement.z;
-
-        Quaternion currentRotation = transform.rotation;
-        if (isMovementPressed)
+        if (!isDashing)
         {
-            Quaternion targetRotation = Quaternion.LookRotation(positionToLookAt);
-            transform.rotation = Quaternion.Slerp(currentRotation, targetRotation, rotationFactorPerFrame * Time.deltaTime);
+            Vector3 positionToLookAt;
+        
+            positionToLookAt.x = currentMovement.x;
+            positionToLookAt.y = 0.0f;
+            positionToLookAt.z = currentMovement.z;
+
+            Quaternion currentRotation = transform.rotation;
+            if (isMovementPressed)
+            {
+                Quaternion targetRotation = Quaternion.LookRotation(positionToLookAt);
+                transform.rotation = Quaternion.Slerp(currentRotation, targetRotation, rotationFactorPerFrame * Time.deltaTime);
+            }
         }
     }
 
@@ -159,10 +172,19 @@ public class PlayerController : MonoBehaviour
             animator.SetBool(isWalkingHash, false);
             animator.SetBool(isRunningHash, false);
         }
+
+        if (isDashPressed)
+        {
+            animator.SetBool(isDashingHash, true);
+        }
+        else if (!isDashPressed)
+        {
+            animator.SetBool(isDashingHash, false);
+        }
     }
 
     void handleStamina(){
-        if (isRunPressed && playerData.Stamina > 0)
+        if (isRunPressed && playerData.Stamina > 0 && !isDashing)
         {
             float staminaToConsume = playerData.StaminaConsumeRate * Time.deltaTime * 15;
             playerData.Stamina -= (int)(staminaToConsume);
@@ -187,33 +209,41 @@ public class PlayerController : MonoBehaviour
             playerData.StaminaRegenTimer += Time.deltaTime;
         }
     }
-    
-    // Update is called once per frame
-    void Update()
-    {
-        handleRotation();
-        handleAnimation();
 
+    void handleDash()
+    {
         if (isDashPressed && dashTimer <= dashDuration)
         {
-            characterController.Move(transform.forward * dashSpeed * Time.deltaTime);
+            isDashing = true;
             dashTimer += Time.deltaTime;
         }
         else
         {
             isDashPressed = false;
+            isDashing = false;
             dashTimer = 0.0f;
-
-            if (isRunPressed)
-            {
-                characterController.Move(currentRunMovement * Time.deltaTime);
-            }
-            else
-            {
-                characterController.Move(currentMovement * Time.deltaTime);
-            }
         }
-        
+    }
+
+    void handleMovement()
+    {
+        if (isRunPressed && playerData.Stamina > 0 && !isDashing)
+        {
+            characterController.Move(currentRunMovement * Time.deltaTime);
+        }
+        else
+        {
+            characterController.Move(currentMovement * Time.deltaTime);
+        }
+    }
+    
+    // Update is called once per frame
+    void Update()
+    {
+        handleDash();
+        handleRotation();
+        handleAnimation();
+        handleMovement();
         handleGravity();
         handleStamina();
     }
