@@ -19,11 +19,12 @@ public class Bullet : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            /* Enemy enemy = other.GetComponent<Enemy>();
+            BlueDragon enemy = other.GetComponent<BlueDragon>();
+
             if (enemy != null)
             {
                 enemy.TakeDamage(damage);
-            } */
+            }
             Destroy(gameObject);
         }
         else if (!other.CompareTag("Player"))

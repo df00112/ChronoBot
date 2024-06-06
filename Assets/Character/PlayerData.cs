@@ -132,4 +132,24 @@ public class PlayerData : MonoBehaviour
         get => _staminaRegenTimer;
         set => _staminaRegenTimer = value;
     }
+
+    public void TakeDamage(int amount)
+    {
+        _health -= amount;
+        if (_health <= 0)
+        {
+            _health = 0;
+            Debug.Log("Player died.");
+            // End game state
+        }
+        else
+        {
+            Debug.Log("Player took damage, current health: " + _health);
+        }
+
+        if (_healthBar != null)
+        {
+            _healthBar.SetHealth(_health);
+        }
+    }
 }

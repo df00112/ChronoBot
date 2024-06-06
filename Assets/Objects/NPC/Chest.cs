@@ -18,7 +18,7 @@ public class Chest : MonoBehaviour, IInteractable
 
     public bool Interact(Interactor interactor)
     {
-        
+
         // Trigger the chest opening animation
         // Play the chest opening sound
         // Spawn loot
