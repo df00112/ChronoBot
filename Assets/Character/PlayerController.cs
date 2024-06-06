@@ -220,11 +220,17 @@ public class PlayerController : MonoBehaviour
 
     void OnEnable()
     {
-        playerInput.Enable();
+        if (playerInput != null)
+        {
+            playerInput.Enable();
+        }
     }
 
     void OnDisable()
     {
-        playerInput.Disable();
+        if (playerInput != null)
+        {
+            playerInput.Disable();
+        }
     }
 }
