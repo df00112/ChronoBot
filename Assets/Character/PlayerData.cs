@@ -135,11 +135,21 @@ public class PlayerData : MonoBehaviour
 
     public void TakeDamage(int amount)
     {
-        Health -= amount;
-        if (Health <= 0)
+        _health -= amount;
+        if (_health <= 0)
         {
-            Health = 0;
+            _health = 0;
             Debug.Log("Player died.");
+            // End game state
+        }
+        else
+        {
+            Debug.Log("Player took damage, current health: " + _health);
+        }
+
+        if (_healthBar != null)
+        {
+            _healthBar.SetHealth(_health);
         }
     }
 }
