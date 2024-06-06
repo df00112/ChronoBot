@@ -16,4 +16,12 @@ public class Powerup : MonoBehaviour, IInteractable
         gameObject.SetActive(false);
         return true;
     }
+
+    void FixedUpdate()
+    {
+        if (transform.parent == null)
+        {
+            transform.Rotate(Vector3.up, 1.0f);
+        }
+    }
 }

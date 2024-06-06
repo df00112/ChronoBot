@@ -12,4 +12,12 @@ public class PowerUp : MonoBehaviour, IInteractable
         Debug.Log("PowerUp picked up");
         return true;
     }
+
+    void FixedUpdate()
+    {
+        if (transform.parent == null)
+        {
+            transform.Rotate(Vector3.up, 1.0f);
+        }
+    }
 }

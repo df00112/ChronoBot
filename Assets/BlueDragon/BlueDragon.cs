@@ -56,6 +56,5 @@ public class BlueDragon : MonoBehaviour
     void Update()
     {
         UpdateAttackState();
-        Debug.Log("Update is attacking: " + isAttacking);
     }
 }
