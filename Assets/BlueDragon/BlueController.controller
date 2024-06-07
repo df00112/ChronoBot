@@ -219,6 +219,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22847163f9dfa064db000cbc2e072760, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-1468704369195309324
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16d8d8dfcfc4bda42b665dfd3547ce50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundEvent:
+    Guid:
+      Data1: 1596440245
+      Data2: 1252328809
+      Data3: 1173067442
+      Data4: 804881258
+    Path: event:/Enemies/DragonEnemy/Idle
 --- !u!1102 &-515563114605773300
 AnimatorState:
   serializedVersion: 6
@@ -263,6 +282,7 @@ AnimatorState:
   - {fileID: -2746854770051385533}
   m_StateMachineBehaviours:
   - {fileID: -2062306482731820114}
+  - {fileID: -1468704369195309324}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -341,6 +361,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a23881c21da530549b2d1a527a6650a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1589067476053445426
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16d8d8dfcfc4bda42b665dfd3547ce50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundEvent:
+    Guid:
+      Data1: 461850576
+      Data2: 1167541845
+      Data3: -705799039
+      Data4: -1160820035
+    Path: event:/Enemies/DragonEnemy/Attacking
 --- !u!1102 &1915012087050872446
 AnimatorState:
   serializedVersion: 6
@@ -355,6 +394,7 @@ AnimatorState:
   - {fileID: 4930382158015545691}
   m_StateMachineBehaviours:
   - {fileID: 3179462102399365622}
+  - {fileID: 1589067476053445426}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -481,6 +521,25 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &6128376252093462726
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16d8d8dfcfc4bda42b665dfd3547ce50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundEvent:
+    Guid:
+      Data1: -2026024764
+      Data2: 1176599613
+      Data3: -153204289
+      Data4: 129259239
+    Path: event:/Enemies/DragonEnemy/Dying
 --- !u!1101 &6821112072530057453
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -517,7 +576,8 @@ AnimatorState:
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: 6128376252093462726}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1

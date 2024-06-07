@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FMODUnity;
 
 public class PlayerData : MonoBehaviour
 {
@@ -22,6 +23,10 @@ public class PlayerData : MonoBehaviour
     // Display variables
     [SerializeField] private HealthBar _healthBar;
     [SerializeField] private StaminaBar _staminaBar;
+
+    [SerializeField] private EventReference lowHealthSound;
+    [SerializeField] private EventReference deathSound;
+    [SerializeField] private EventReference gameOverSound;
 
     void Awake()
     {
@@ -139,12 +144,19 @@ public class PlayerData : MonoBehaviour
         if (_health <= 0)
         {
             _health = 0;
+            AudioManager.instance.PlayOneShot(deathSound, this.transform.position);
+            AudioManager.instance.PlayOneShot(gameOverSound, this.transform.position);
             Debug.Log("Player died.");
             // End game state
         }
         else
         {
             Debug.Log("Player took damage, current health: " + _health);
+        }
+
+        if (_health < (_maxHealth / 2))
+        {
+            AudioManager.instance.PlayOneShot(lowHealthSound, this.transform.position);
         }
 
         if (_healthBar != null)

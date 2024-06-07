@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using FMODUnity;
 
 public class PlayerController : MonoBehaviour
 {
@@ -86,6 +87,7 @@ public class PlayerController : MonoBehaviour
 
     void onMovementInput (InputAction.CallbackContext context)
     {
+
         if (!isDashing)
         {
             currentMovementInput = context.ReadValue<Vector2>();
